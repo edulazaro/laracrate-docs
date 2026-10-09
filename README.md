@@ -2,6 +2,14 @@
 
 # Laracrate Docs
 
+<p align="center">
+    <a href="https://github.com/edulazaro/laracrate-docs/actions/workflows/tests.yml"><img src="https://github.com/edulazaro/laracrate-docs/actions/workflows/tests.yml/badge.svg" alt="Tests"></a>
+    <a href="https://packagist.org/packages/edulazaro/laracrate-docs"><img src="https://img.shields.io/packagist/v/edulazaro/laracrate-docs" alt="Latest Stable Version"></a>
+    <a href="https://packagist.org/packages/edulazaro/laracrate-docs"><img src="https://img.shields.io/packagist/dt/edulazaro/laracrate-docs" alt="Total Downloads"></a>
+    <a href="https://packagist.org/packages/edulazaro/laracrate-docs"><img src="https://img.shields.io/packagist/php-v/edulazaro/laracrate-docs" alt="PHP Version"></a>
+    <a href="https://github.com/edulazaro/laracrate-docs/blob/main/LICENSE"><img src="https://img.shields.io/packagist/l/edulazaro/laracrate-docs" alt="License"></a>
+</p>
+
 Native editable documents for [Laracrate](https://github.com/edulazaro/laracrate). A document is not a file you upload: it is a row in your drive with no binary behind it, like a Google Doc in Drive. The file is the index; the content, the versions and the named fields live apart.
 
 ## Table of contents

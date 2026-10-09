@@ -1,7 +1,16 @@
 {
     "name": "edulazaro/laracrate-docs",
     "description": "Native editable documents for Laracrate: the file is the drive index, the content lives apart. Versions, named fields and PDF export.",
-    "keywords": ["laravel", "laracrate", "documents", "editor", "drive", "tiptap", "prosemirror", "versions"],
+    "keywords": [
+        "laravel",
+        "laracrate",
+        "documents",
+        "editor",
+        "drive",
+        "tiptap",
+        "prosemirror",
+        "versions"
+    ],
     "homepage": "https://github.com/edulazaro/laracrate-docs",
     "license": "MIT",
     "type": "library",
@@ -33,5 +42,14 @@
         "sort-packages": true
     },
     "minimum-stability": "stable",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "require-dev": {
+        "orchestra/testbench": "^9.0|^10.0",
+        "phpunit/phpunit": "^11.0"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "EduLazaro\\LaracrateDocs\\Tests\\": "tests/"
+        }
+    }
 }
