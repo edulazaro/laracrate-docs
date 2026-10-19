@@ -24,7 +24,7 @@
         "php": "^8.2",
         "illuminate/database": "^11.0|^12.0",
         "illuminate/support": "^11.0|^12.0",
-        "edulazaro/laracrate": "^1.0"
+        "edulazaro/laracrate": "^2.0"
     },
     "autoload": {
         "psr-4": {

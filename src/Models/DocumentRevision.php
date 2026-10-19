@@ -22,6 +22,7 @@ class DocumentRevision extends Model
     protected $fillable = [
         'revision',
         'content_json',
+        'content_html',
         'title',
         'label',
         'word_count',

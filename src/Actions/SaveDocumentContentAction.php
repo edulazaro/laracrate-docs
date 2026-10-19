@@ -24,12 +24,21 @@ class SaveDocumentContentAction
     /** Cada cuánto, como mucho, se refresca la ficha del drive. */
     public const FILE_SYNC_SECONDS = 30;
 
+    /**
+     * A null $contentJson saves HTML-only content: what an agent or an import wrote
+     * outside the editor. The editor loads the HTML and writes the JSON the first
+     * time it saves.
+     */
     public function handle(
         Document $document,
-        array $contentJson,
+        ?array $contentJson,
         ?string $contentHtml = null,
         ?int $wordCount = null,
     ): Document {
+        if ($contentJson === null && $contentHtml === null) {
+            throw new \InvalidArgumentException('A document needs its content as JSON or as HTML.');
+        }
+
         $document->content_json = $contentJson;
 
         if ($contentHtml !== null) {
@@ -64,7 +73,9 @@ class SaveDocumentContentAction
 
         // Un solo UPDATE: el tamaño que el drive muestra y la fecha por la que ordena.
         $file->forceFill([
-            'size' => strlen((string) json_encode($document->content_json)),
+            'size' => $document->content_json !== null
+                ? strlen((string) json_encode($document->content_json))
+                : strlen((string) $document->content_html),
         ])->save();
     }
 }

@@ -25,10 +25,11 @@ Native editable documents for [Laracrate](https://github.com/edulazaro/laracrate
 9. [Versions](#versions)
 10. [Fields](#fields)
 11. [The drive query](#the-drive-query)
-12. [Exporting](#exporting)
-13. [What this package does not do](#what-this-package-does-not-do)
-14. [Author](#author)
-15. [License](#license)
+12. [Previews in the viewer](#previews-in-the-viewer)
+13. [Exporting](#exporting)
+14. [What this package does not do](#what-this-package-does-not-do)
+15. [Author](#author)
+16. [License](#license)
 
 ## What is Laracrate Docs?
 
@@ -52,7 +53,7 @@ The result is that your drive stays **one query**. A folder listing can sort by 
 
 - PHP 8.2+
 - Laravel 11 or 12
-- [edulazaro/laracrate](https://github.com/edulazaro/laracrate) ^1.0
+- [edulazaro/laracrate](https://github.com/edulazaro/laracrate) ^2.0 (for Laracrate 1.x, use laracrate-docs 1.x)
 
 ## Installation
 
@@ -114,6 +115,16 @@ The file row is **not** touched on every save. Autosave fires several times a mi
 
 Renaming goes through `$document->rename($title)`, which writes both `name` and `title` on the file in one place. The drive sorts by one and displays the other, and letting each caller pick is how they end up disagreeing.
 
+### Content written outside the editor
+
+An agent or an import has HTML, not the editor's JSON. Save it with a `null` JSON:
+
+```php
+app(SaveDocumentContentAction::class)->handle($document, null, $html, $wordCount);
+```
+
+The document then holds only `content_html`, and the drive shows its size. Your editor should load the HTML when there is no JSON and save once on opening, so the document gets its JSON from then on. Versions of HTML-only content keep the HTML, and reverting to one brings it back.
+
 ## Versions
 
 ```php
@@ -168,6 +179,21 @@ File::where('owner_type', 'user')->where('owner_id', $user->id)
 ```
 
 To go from a file to its content, `Document::forFile($file)`. In a listing, eager load with `with('file')` or the title accessor will give you a silent N+1.
+
+## Previews in the viewer
+
+With a Laracrate that has `ViewerRegistry`, documents open in its viewer (`laracrate::viewer`) like an image or a recording: `Laracrate.viewer.open($file->slug)` shows `content_html` small and scrolling, and readable at full size. Nothing to call; the package registers itself. With an older Laracrate the viewer keeps answering 422 for documents.
+
+To add an "Edit" button to that card, tell the package which named route opens your editor. It receives the file's slug:
+
+```bash
+php artisan vendor:publish --tag=laracrate-docs-config
+```
+
+```php
+// config/laracrate-docs.php
+'edit_route' => 'documents.edit',   // Route::get('/documents/{slug}', ...)->name('documents.edit')
+```
 
 ## Exporting
 

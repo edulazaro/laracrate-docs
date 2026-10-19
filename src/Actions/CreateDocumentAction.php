@@ -59,7 +59,7 @@ class CreateDocumentAction
                 'collection' => $collection,
                 'context'    => $context,
 
-                'access'     => 'signed',
+                'access'     => 'private',
                 'visibility' => 'private',
 
                 // La puerta del observer: sin esto intentaría procesar un binario

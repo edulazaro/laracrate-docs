@@ -127,6 +127,8 @@ class Document extends Model
         $revision = new DocumentRevision([
             'revision'     => ((int) $last) + 1,
             'content_json' => $this->content_json,
+            // Only HTML-only content keeps its HTML: otherwise it is rebuilt from the JSON.
+            'content_html' => $this->content_json === null ? $this->content_html : null,
             'title'        => $this->title,
             'label'        => $label,
             'word_count'   => $this->word_count,
@@ -158,6 +160,9 @@ class Document extends Model
         $this->snapshot('antes de restaurar la version ' . $revision->revision, $author);
 
         $this->content_json = $revision->content_json;
+        if ($revision->content_json === null) {
+            $this->content_html = $revision->content_html;
+        }
         $this->word_count = $revision->word_count;
         $this->save();
 
