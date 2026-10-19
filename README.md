@@ -52,7 +52,7 @@ The result is that your drive stays **one query**. A folder listing can sort by 
 ## Requirements
 
 - PHP 8.2+
-- Laravel 11 or 12
+- Laravel 12 or 13
 - [edulazaro/laracrate](https://github.com/edulazaro/laracrate) ^2.0 (for Laracrate 1.x, use laracrate-docs 1.x)
 
 ## Installation
